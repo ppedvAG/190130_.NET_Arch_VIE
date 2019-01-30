@@ -26,27 +26,52 @@ namespace AsyncAwait_Demo
             InitializeComponent();
         }
 
+        // async void ist nur bei EventHandler erlaubt
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
-            // string uhrzeit = GibUhrzeit().Result; // Blockiert
-            string uhrzeit = await GibUhrzeit(); // Blockiert nicht
-            MessageBox.Show(uhrzeit);
+            #region Variante mit Async/Await
+            //// string uhrzeit = GibUhrzeit().Result; // Blockiert
+            //string uhrzeit = await GibUhrzeit(); // Blockiert nicht
+            //MessageBox.Show(uhrzeit);
 
-            MessageBox.Show("Start");
-            await MachEtwas(); // await blockiert nicht -> UI-Thread kann weitermachen
-            MessageBox.Show("Ende");
+            //MessageBox.Show("Start");
+            //await MachEtwas(); // await blockiert nicht -> UI-Thread kann weitermachen
+            //MessageBox.Show("Ende"); 
+            #endregion
+
+            try
+            {
+                await WirfEineExceptionInEinemTask();
+            }
+            catch (DivideByZeroException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        // async void       // NICHT VERWENDEN
+        // async Task       // -> für alles was void ist
+        // async Task<T>    // -> T => rückgabe
+
+        private Task WirfEineExceptionInEinemTask()
+        {
+            return Task.Run(() =>
+            {
+                Thread.Sleep(3000);
+                throw new DivideByZeroException();
+            });
         }
 
         private Task MachEtwas()
         {
-           return Task.Run(() =>
-            {
-                for (int i = 0; i <= 100; i++)
-                {
-                    Thread.Sleep(100);
-                    Dispatcher.Invoke(() => progressBarWert.Value = i); // UI-Thread führt diese Logik für mich aus
+            return Task.Run(() =>
+             {
+                 for (int i = 0; i <= 100; i++)
+                 {
+                     Thread.Sleep(100);
+                     Dispatcher.Invoke(() => progressBarWert.Value = i); // UI-Thread führt diese Logik für mich aus
                 }
-            });
+             });
         }
 
         private Task<string> GibUhrzeit()
