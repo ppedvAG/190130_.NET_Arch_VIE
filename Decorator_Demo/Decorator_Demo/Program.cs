@@ -10,6 +10,14 @@ namespace Decorator_Demo
     {
         static void Main(string[] args)
         {
+
+            var gutePizza = new Trüffel(new Salami (new Käse(new Pizza())));
+
+            Console.WriteLine(gutePizza.Name);
+            Console.WriteLine(gutePizza.Preis);
+
+            Console.WriteLine("---ENDE---");
+            Console.ReadKey();
         }
     }
 }
