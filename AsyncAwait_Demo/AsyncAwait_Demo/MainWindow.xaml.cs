@@ -24,21 +24,17 @@ namespace AsyncAwait_Demo
         public MainWindow()
         {
             InitializeComponent();
-            IchHabeFertigEvent += TaskIstFertig;
         }
 
-        private void TaskIstFertig(object sender, EventArgs e)
+        private async void Button_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Ende");
-        }
+            // string uhrzeit = GibUhrzeit().Result; // Blockiert
+            string uhrzeit = await GibUhrzeit(); // Blockiert nicht
+            MessageBox.Show(uhrzeit);
 
-        private event EventHandler IchHabeFertigEvent;
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
             MessageBox.Show("Start");
-            MachEtwas();
-            //MessageBox.Show("Ende");
+            await MachEtwas(); // await blockiert nicht -> UI-Thread kann weitermachen
+            MessageBox.Show("Ende");
         }
 
         private Task MachEtwas()
@@ -50,7 +46,15 @@ namespace AsyncAwait_Demo
                     Thread.Sleep(100);
                     Dispatcher.Invoke(() => progressBarWert.Value = i); // UI-Thread führt diese Logik für mich aus
                 }
-                IchHabeFertigEvent?.Invoke(this, EventArgs.Empty);
+            });
+        }
+
+        private Task<string> GibUhrzeit()
+        {
+            return Task.Run(() =>
+            {
+                Thread.Sleep(3000);
+                return DateTime.Now.ToLongTimeString();
             });
         }
     }
