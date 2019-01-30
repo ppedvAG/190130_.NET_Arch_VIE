@@ -10,6 +10,20 @@ namespace Singleton_Demo
     {
         static void Main(string[] args)
         {
+            //new Logger().Log("Hallo Welt");
+            //new Logger().Log("so macht man es eigentlich nicht !");
+
+            //Logger.Instance.Log("Hallo Welt");
+            //Logger.Instance.Log("Schaut schon bisserl besser aus :)");
+
+            Parallel.For(0, 1000, i =>
+              {
+                  Logger.Instance.Log($"Hallo Welt {i}");
+              });
+
+
+            Console.WriteLine("---ENDE---");
+            Console.ReadKey();
         }
     }
 }
