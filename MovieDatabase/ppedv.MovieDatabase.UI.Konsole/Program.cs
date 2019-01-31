@@ -13,12 +13,12 @@ namespace ppedv.MovieDatabase.UI.Konsole
     {
         static void Main(string[] args)
         {
-            Core core = new Core(new EFRepository(new EFContext(@"Server=(localDB)\MSSQLLocalDB;Database=MovieDatabase;Trusted_Connection=true;AttachDbFilename=C:\temp\db.mdf")));
+            Core core = new Core(new EFUnitOfWork(new EFContext(@"Server=(localDB)\MSSQLLocalDB;Database=MovieDatabase;Trusted_Connection=true;AttachDbFilename=C:\temp\db.mdf")));
 
-            if (core.Repository.Query<Person>().Count() == 0)
+            if (core.UnitOfWork.PersonRepository.Query().Count() == 0) // Spezifisches Repo
                 core.CreateDemoData();
 
-            foreach (Person person in core.Repository.GetAll<Person>())
+            foreach (Person person in core.UnitOfWork.GetRepository<Person>().GetAll()) // Generisches Repo
             {
                 Console.WriteLine($"{person.FirstName} {person.LastName}- Age: {person.Age}");
             }
