@@ -6,9 +6,9 @@ namespace ppedv.MovieDatabase.Logic
 {
     public class Core
     {
-        public Core(IRepository repository) => Repository = repository;
+        public Core(IUnitOfWork unitOfWork) => UnitOfWork = unitOfWork;
 
-        public IRepository Repository { get; set; }
+        public IUnitOfWork UnitOfWork { get; set; }
 
         public void CreateDemoData()
         {
@@ -63,10 +63,12 @@ namespace ppedv.MovieDatabase.Logic
             mt1.Movies.Add(m2);
             mt1.Movies.Add(m3);
 
-            Repository.Add(mt1);
-            Repository.Add(mt2);
-            Repository.Add(p11);
-            Repository.Save();
+            var movieTheaterRepo = UnitOfWork.GetRepository<MovieTheater>(); // Generisches Repo
+            movieTheaterRepo.Add(mt1);
+            movieTheaterRepo.Add(mt2);
+            UnitOfWork.PersonRepository.Add(p11); // Spezifisches Repo
+
+            UnitOfWork.Save();
         }
     }
 }
