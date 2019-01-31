@@ -14,5 +14,13 @@ namespace ppedv.MovieDatabase.Data.EF
         public DbSet<Movie> Movie { get; set; }
         public DbSet<Person> Person { get; set; }
         public DbSet<MovieTheater> MovieTheater { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Movie>().HasMany(x => x.Actors)
+                                        .WithMany(x => x.Movies);
+            // Many-to-Many für Actors zu Movies
+        }
     }
 }
