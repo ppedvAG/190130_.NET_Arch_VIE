@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ppedv.MovieDatabase.Logic",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ppedv.MovieDatabase.UI.Konsole", "ppedv.MovieDatabase.UI.Konsole\ppedv.MovieDatabase.UI.Konsole.csproj", "{CEAA3DA1-0812-4571-A3BF-D30D0EDA28A8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ppedv.MovieDatabase.Data.SQLite", "ppedv.MovieDatabase.Data.SQLite\ppedv.MovieDatabase.Data.SQLite.csproj", "{198BF46C-098A-407C-AA27-758BBD73389D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +49,10 @@ Global
 		{CEAA3DA1-0812-4571-A3BF-D30D0EDA28A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CEAA3DA1-0812-4571-A3BF-D30D0EDA28A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CEAA3DA1-0812-4571-A3BF-D30D0EDA28A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{198BF46C-098A-407C-AA27-758BBD73389D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{198BF46C-098A-407C-AA27-758BBD73389D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{198BF46C-098A-407C-AA27-758BBD73389D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{198BF46C-098A-407C-AA27-758BBD73389D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -57,6 +63,7 @@ Global
 		{C4CCE763-5058-4595-9089-2DD9FF01781E} = {264E94D2-3D1B-43F8-8BF6-5274E37699E2}
 		{081C71AA-2691-4CB9-A23B-437281011C8D} = {EAC854AB-52B8-4EFA-AFCE-DC5F961D0C77}
 		{CEAA3DA1-0812-4571-A3BF-D30D0EDA28A8} = {8DF774EA-05B1-48BA-B01C-400E5538F5EB}
+		{198BF46C-098A-407C-AA27-758BBD73389D} = {264E94D2-3D1B-43F8-8BF6-5274E37699E2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {54CDB088-DBFD-41BD-92D9-826EF39521C0}
