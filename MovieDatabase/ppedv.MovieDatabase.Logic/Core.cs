@@ -1,14 +1,19 @@
 ﻿using ppedv.MovieDatabase.Domain;
 using ppedv.MovieDatabase.Domain.Interfaces;
 using System;
+using System.Linq;
 
 namespace ppedv.MovieDatabase.Logic
 {
     public class Core
     {
-        public Core(IUnitOfWork unitOfWork) => UnitOfWork = unitOfWork;
+        public Core(params IUnitOfWork[] unitsOfWork) => UnitsOfWork = unitsOfWork;
+        private IUnitOfWork[] UnitsOfWork { get; set; }
 
-        public IUnitOfWork UnitOfWork { get; set; }
+        public IUnitOfWork GetUnitOfWorkForType<T>()
+        {
+            return UnitsOfWork.First(x => x.SupportedTypes.Contains(typeof(T)));
+        }
 
         public void CreateDemoData()
         {
@@ -63,12 +68,38 @@ namespace ppedv.MovieDatabase.Logic
             mt1.Movies.Add(m2);
             mt1.Movies.Add(m3);
 
-            var movieTheaterRepo = UnitOfWork.GetRepository<MovieTheater>(); // Generisches Repo
+            // UnitOfWork für die oberen Datentypen finden:
+            var efUnitOfWork = GetUnitOfWorkForType<MovieTheater>();
+
+            var movieTheaterRepo = efUnitOfWork.GetRepository<MovieTheater>(); // Generisches Repo
             movieTheaterRepo.Add(mt1);
             movieTheaterRepo.Add(mt2);
-            UnitOfWork.PersonRepository.Add(p11); // Spezifisches Repo
+            efUnitOfWork.PersonRepository.Add(p11); // Spezifisches Repo
 
-            UnitOfWork.Save();
+            efUnitOfWork.Save();
+
+            var sqliteUnitOfWork = GetUnitOfWorkForType<StreamProvider>();
+
+            if (sqliteUnitOfWork == null)
+                return;
+
+            StreamProvider sp1 = new StreamProvider
+            {
+                Name = "Netflix",
+                MonthlySubscriptionRate = 12.99m,
+                Movies = "0,1"
+            };
+            StreamProvider sp2 = new StreamProvider
+            {
+                Name = "Amazon Prime",
+                MonthlySubscriptionRate = 7.99m,
+                Movies = "1,2"
+            };
+
+            var streamProviderRepo = sqliteUnitOfWork.GetRepository<StreamProvider>();
+            streamProviderRepo.Add(sp1);
+            streamProviderRepo.Add(sp2);
+            sqliteUnitOfWork.Save();
         }
     }
 }
