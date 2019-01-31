@@ -33,7 +33,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -48,6 +55,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ppedv.MovieDatabase.Data.EF\ppedv.MovieDatabase.Data.EF.csproj">
+      <Project>{583926aa-c9d2-4935-bba2-d39277bf6436}</Project>
+      <Name>ppedv.MovieDatabase.Data.EF</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ppedv.MovieDatabase.Domain\ppedv.MovieDatabase.Domain.csproj">
+      <Project>{00a22bdb-3315-4278-ae32-f6d11052d1ab}</Project>
+      <Name>ppedv.MovieDatabase.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ppedv.MovieDatabase.Logic\ppedv.MovieDatabase.Logic.csproj">
+      <Project>{081c71aa-2691-4cb9-a23b-437281011c8d}</Project>
+      <Name>ppedv.MovieDatabase.Logic</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
