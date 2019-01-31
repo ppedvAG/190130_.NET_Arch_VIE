@@ -11,6 +11,8 @@ namespace ppedv.MovieDatabase.Data.EF
         public EFUnitOfWork(EFContext context) => this.context = context;
         private readonly EFContext context;
 
+        public Type[] SupportedTypes => new Type[] { typeof(Person), typeof(Movie), typeof(MovieTheater) };
+
         // Variante "faul" :
         public IPersonRepository PersonRepository => new EFPersonRepository(context);
         public IUniversalRepository<T> GetRepository<T>() where T : Entity, new()

@@ -28,6 +28,7 @@ namespace ppedv.MovieDatabase.Data.SQLite
             connection.BeginTransaction();
         }
         private readonly SQLiteConnection connection;
+        public Type[] SupportedTypes => new Type[] { typeof(StreamProvider) };
 
         public IPersonRepository PersonRepository => new SQLitePersonRepository(connection);
         public IUniversalRepository<T> GetRepository<T>() where T : Entity, new()
