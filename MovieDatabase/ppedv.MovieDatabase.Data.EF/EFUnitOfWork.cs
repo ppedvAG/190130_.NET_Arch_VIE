@@ -13,7 +13,7 @@ namespace ppedv.MovieDatabase.Data.EF
 
         // Variante "faul" :
         public IPersonRepository PersonRepository => new EFPersonRepository(context);
-        public IUniversalRepository<T> GetRepository<T>() where T : Entity
+        public IUniversalRepository<T> GetRepository<T>() where T : Entity, new()
         {
             return new EFUniversalRepository<T>(context);
         }

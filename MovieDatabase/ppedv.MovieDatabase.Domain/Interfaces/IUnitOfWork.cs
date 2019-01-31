@@ -6,7 +6,7 @@
         IPersonRepository PersonRepository { get; }
 
         // Generelle-Variante: Repository generieren
-        IUniversalRepository<T> GetRepository<T>() where T : Entity;
+        IUniversalRepository<T> GetRepository<T>() where T : Entity, new();
         void Save();
     }
 }
