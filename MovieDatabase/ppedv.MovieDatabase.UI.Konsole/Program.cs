@@ -23,6 +23,7 @@ namespace ppedv.MovieDatabase.UI.Konsole
                 Console.WriteLine($"{person.FirstName} {person.LastName}- Age: {person.Age}");
             }
 
+            Console.WriteLine(core.UnitOfWork.PersonRepository.GetPersonWithHighestSalary().LastName);
 
             Console.WriteLine("---ENDE---");
             Console.ReadKey();
