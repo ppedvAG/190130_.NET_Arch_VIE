@@ -55,10 +55,6 @@
       <Project>{4235DF45-430C-4D10-9B99-728E123FC49B}</Project>
       <Name>Domain</Name>
     </ProjectReference>
-    <ProjectReference Include="..\FreeFeatures\FreeFeatures.csproj">
-      <Project>{115ED202-BD44-48CE-9A1B-D13F35DE1E80}</Project>
-      <Name>FreeFeatures</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Logik\Logik.csproj">
       <Project>{E046E53D-4321-4C3C-A3A5-C5325F1E7F74}</Project>
       <Name>Logik</Name>
